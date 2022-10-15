@@ -1,13 +1,11 @@
 package com.picpay.desafio.android.data.response
 
-import android.os.Parcelable
-import com.google.gson.annotations.SerializedName
-import kotlinx.android.parcel.Parcelize
+import com.squareup.moshi.JsonClass
 
-@Parcelize
+@JsonClass(generateAdapter = true)
 data class UserResponse(
-    @SerializedName("img") val img: String,
-    @SerializedName("name") val name: String,
-    @SerializedName("id") val id: Int,
-    @SerializedName("username") val username: String
-) : Parcelable
+    val img: String,
+    val name: String,
+    val id: Int,
+    val username: String
+)
