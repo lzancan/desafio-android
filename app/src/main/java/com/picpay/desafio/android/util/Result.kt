@@ -23,4 +23,11 @@ sealed class Result<out D, out E> {
         if (this is Error) block(value)
         return this
     }
+
+    fun get(): D? {
+        return when (this) {
+            is Success -> value
+            is Error -> null
+        }
+    }
 }
