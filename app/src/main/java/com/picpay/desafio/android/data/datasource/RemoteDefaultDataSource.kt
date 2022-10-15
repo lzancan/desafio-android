@@ -13,7 +13,7 @@ class RemoteDefaultDataSource @Inject constructor(
         return try {
             Result.Success(api.getUsers())
         } catch (exception: Exception) {
-            Result.Error(ResultError.NetworkError)
+            Result.Error(ResultError.Error)
         }
     }
 

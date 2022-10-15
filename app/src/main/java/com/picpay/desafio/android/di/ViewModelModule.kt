@@ -1,6 +1,8 @@
 package com.picpay.desafio.android.di
 
 import com.picpay.desafio.android.data.PicPayDefaultRepository
+import com.picpay.desafio.android.data.datasource.LocalDataSource
+import com.picpay.desafio.android.data.datasource.LocalDefaultDataSource
 import com.picpay.desafio.android.data.datasource.RemoteDataSource
 import com.picpay.desafio.android.data.datasource.RemoteDefaultDataSource
 import com.picpay.desafio.android.domain.PicPayRepository
@@ -20,6 +22,9 @@ abstract class ViewModelModule {
 
     @Binds
     abstract fun bindPicPayRepository(repository: PicPayDefaultRepository): PicPayRepository
+
+    @Binds
+    abstract fun bindAppLocalDataSource(remoteDataSource: LocalDefaultDataSource): LocalDataSource
 
     @Binds
     abstract fun bindAppRemoteDataSource(remoteDataSource: RemoteDefaultDataSource): RemoteDataSource

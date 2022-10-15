@@ -1,9 +1,8 @@
 package com.picpay.desafio.android.domain.usecase
 
-import com.picpay.desafio.android.data.response.UserResponse
+import com.picpay.desafio.android.UserTestFactory
 import com.picpay.desafio.android.domain.PicPayRepository
-import com.picpay.desafio.android.domain.mapper.UserMapper.mapToModel
-import com.picpay.desafio.android.domain.mapper.UserTestFactory
+import com.picpay.desafio.android.domain.model.User
 import com.picpay.desafio.android.util.Result
 import com.picpay.desafio.android.util.ResultError
 import io.mockk.coEvery
@@ -25,8 +24,7 @@ class GetUsersUseCaseTest {
 
     @Test
     fun `should call repository with list when getUsers Success`() = runTest {
-        val returnResult = Result.Success(listOf(UserTestFactory.makeUserResponse()))
-        val resultMapped = returnResult.value.mapToModel()
+        val returnResult = Result.Success(listOf(UserTestFactory.makeUser()))
         prepareScenario(
             result = returnResult
         )
@@ -34,12 +32,12 @@ class GetUsersUseCaseTest {
         val response = getUsers()
 
         coVerify(exactly = 1) { repository.getUsers() }
-        Assert.assertEquals(resultMapped.single(), response.get()?.single())
+        Assert.assertEquals(returnResult.get()?.first(), response.get()?.single())
     }
 
     @Test
     fun `should call repository with error when getUsers Error`() = runTest {
-        val returnResult = Result.Error(ResultError.NetworkError)
+        val returnResult = Result.Error(ResultError.Error)
         prepareScenario(
             result = returnResult
         )
@@ -51,7 +49,7 @@ class GetUsersUseCaseTest {
     }
 
     private fun prepareScenario(
-        result: Result<List<UserResponse>, ResultError>
+        result: Result<List<User>, ResultError>
     ) {
         coEvery { repository.getUsers() } returns result
     }

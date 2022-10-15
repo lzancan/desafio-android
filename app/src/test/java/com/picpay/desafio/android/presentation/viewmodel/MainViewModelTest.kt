@@ -3,8 +3,7 @@ package com.picpay.desafio.android.presentation.viewmodel
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.picpay.desafio.android.CoroutineTestRule
-import com.picpay.desafio.android.data.response.UserResponse
-import com.picpay.desafio.android.domain.mapper.UserTestFactory
+import com.picpay.desafio.android.UserTestFactory
 import com.picpay.desafio.android.domain.model.User
 import com.picpay.desafio.android.domain.usecase.GetUsersUseCase
 import com.picpay.desafio.android.util.Result
@@ -57,7 +56,7 @@ class MainViewModelTest {
 
     @Test
     fun `should set loadError on viewModel fetchData Error`() = runTest {
-        val returnResult = Result.Error(ResultError.NetworkError)
+        val returnResult = Result.Error(ResultError.Error)
         prepareScenario(
             result = returnResult
         )
